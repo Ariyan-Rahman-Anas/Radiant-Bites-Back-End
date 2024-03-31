@@ -1,23 +1,13 @@
 const express = require("express");
 const multer = require("multer");
-const storage = require("..")
-// const upload = multer({ storage });
+
 const {
   postingItem,
   getSingleItem,
   getAllItems,
-  // findByFoodCategory
-  // getChickenItems
-  FindingByCategory
+  findingByCategory
 } = require("./../controller/allItemsController");
 const route = express.Router();
-
-// const storageFunc = multer({
-//   storage: multer.memoryStorage,
-//   filename: (req, file) => {
-//     callback(null, `${Date.now()}-${file.originalname}`);
-//   },
-// });
 
 
 
@@ -34,7 +24,6 @@ const upload = multer({
 });
 
 
-// const upload = multer({ storage });
 
 //post a item
 route.post("/", upload.single("image"), postingItem);
@@ -46,8 +35,6 @@ route.get("/", getAllItems);
 route.get("/:id", getSingleItem);
 
 //getting a specific item by food category
-route.get("/:category", (req, res) => {
-  console.log(req.params)
-});
+route.get("/menu/:category", findingByCategory)
 
 module.exports = route;
