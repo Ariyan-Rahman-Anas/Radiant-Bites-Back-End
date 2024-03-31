@@ -2,7 +2,7 @@ const ItemModel = require("./../model/AllItems");
 const cloudinary = require("cloudinary").v2; 
 // const cloudinaryConfig = require("./../config/cloudinary") 
 
-
+DB_URI = `mongodb+srv://Radiant-Bites:112233445566@cluster0.toh0ohl.mongodb.net/radiant-bites?retryWrites=true&w=majority&appName=Cluster0`;
 
 //posting item
 const postingItem = async (req, res) => {
@@ -66,8 +66,39 @@ const getAllItems = async (req, res) => {
   }
 };
 
+//finding a dish by food category
+// const findByFoodCategory = async (req, res) => {
+//   let query = {};
+//   try {
+//     if (req?.query?.foodCategory) {
+//       query = { foodCategory: req?.query?.foodCategory };
+//     }
+//     const itemFindingByCategory = await ItemModel.find(query);
+//     res.json({ itemFindingByCategory });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+
+// Function to fetch chicken items
+const FindingByCategory = async (req, res) => {
+  const { category } = req.params;
+  console.log("category is: ", category)
+  try {
+    // const data = await ItemModel.find({ foodCategory: category });
+    return res.status(200).send("trying");
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+};
+
+
 module.exports = {
   postingItem,
   getSingleItem,
   getAllItems,
+  FindingByCategory
+  // findByFoodCategory
+  // getChickenItems
 };

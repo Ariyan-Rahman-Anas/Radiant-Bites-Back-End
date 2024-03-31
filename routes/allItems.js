@@ -6,6 +6,9 @@ const {
   postingItem,
   getSingleItem,
   getAllItems,
+  // findByFoodCategory
+  // getChickenItems
+  FindingByCategory
 } = require("./../controller/allItemsController");
 const route = express.Router();
 
@@ -41,5 +44,10 @@ route.get("/", getAllItems);
 
 //getting a specific item by id
 route.get("/:id", getSingleItem);
+
+//getting a specific item by food category
+route.get("/:category", (req, res) => {
+  console.log(req.params)
+});
 
 module.exports = route;
