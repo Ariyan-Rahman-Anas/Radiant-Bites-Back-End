@@ -4,7 +4,17 @@ const itemSchema = new mongoose.Schema(
   {
     foodCategory: {
       type: String,
-      enum: ["chicken", "salads"],
+      enum: [
+        "chefSpecial",
+        "todayOffer",
+        "bdTraditional",
+        "appetizers",
+        "desserts",
+        "beef",
+        "mutton",
+        "chicken",
+        "salads",
+      ],
       required: true,
     },
     name: {

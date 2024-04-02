@@ -1,6 +1,5 @@
 const ItemModel = require("./../model/AllItems");
 const cloudinary = require("cloudinary").v2; 
-// const cloudinaryConfig = require("./../config/cloudinary") 
 
 
 
