@@ -1,10 +1,11 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config();
 const allItemsRouter = require("./routes/allItems");
 const app = express();
 const port = process.env.PORT || 5000;
+const db_config =  require("./config/db_config")
+require("dotenv").config();
+db_config()
 
 //basic middleware
 app.use(express.json());
@@ -20,13 +21,5 @@ app.get("/", (req, res) => {
 
 // server testing
 app.listen(port, () => {
-  console.log("Radiant Bites app is running on: ", port);
-    // .connect("mongodb://localhost:27017/All-Items", { useNewUrlParser: true })
-  mongoose.connect(`${process.env.DB_URI}`)
-    .then((data) => {
-      console.log("MongoDB is connected!");
-    })
-    .catch((err) => {
-      console.log("MongoDB connecting err is :", err);
-    });
+  console.log("Radiant Bites app is running on: ", "http://localhost:"+port);
 });

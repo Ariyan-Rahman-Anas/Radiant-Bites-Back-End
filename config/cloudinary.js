@@ -6,7 +6,3 @@ const cloudinaryConfig = cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET_KEY,
 });
 module.exports = cloudinaryConfig
-
-// CLOUDINARY_NAME: dkg03bek6;
-// CLOUDINARY_API: 481349925159558;
-// CLOUDINARY_SECRET_KEY: W7i8lzV67ZsdZo7cwcIrZu92YX0;

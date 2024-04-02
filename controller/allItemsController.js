@@ -44,9 +44,12 @@ const getSingleItem = async (req, res) => {
   const id = req.params.id;
   try {
     const itemFindingById = await ItemModel.findById(id);
-    res.json({ itemFindingById });
+    if (itemFindingById) {
+      return res.json({ itemFindingById });
+    }
+    return res.status(400).send({ message: "Single item not found!" });
   } catch (error) {
-    console.log(error);
+    return res.status(400).send({ message: "Invalid single item id!" });
   }
 };
 
