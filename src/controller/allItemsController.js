@@ -57,7 +57,7 @@ const getSingleItem = async (req, res) => {
 const getAllItems = async (req, res) => {
   try {
     const result = await ItemModel.find();
-    res.status(201).json({
+    res.status(200).json({
       totalItems: result.length,
       data: result,
     });
@@ -70,8 +70,11 @@ const getAllItems = async (req, res) => {
 const findingByCategory = async (req, res) => {
   const { category } = req.params;
   try {
-    const data = await ItemModel.find({ foodCategory: category });
-    return res.status(200).send(data);
+    const categoryItems = await ItemModel.find({ foodCategory: category });
+    return res.status(200).json({
+      totalItemsInThisCategory: categoryItems.length,
+      data: categoryItems,
+    });
   } catch (error) {
     return res.status(400).send(error);
   }

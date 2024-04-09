@@ -1,18 +1,27 @@
 const express = require("express");
 const cors = require("cors");
-const allItemsRouter = require("./routes/allItems");
+// const allItemsRouter = require("./routes/allItems");
+const allItemsRouter = require("./src/routes/allItems");
+const orderedItemsRouter = require("./src/routes/orderedItems");
 const app = express();
-const port = process.env.PORT || 5000;
-const db_config =  require("./config/db_config")
+const port = process.env.PORT || 3000;
+const db_config =  require("./src/config/db_config")
 require("dotenv").config();
 db_config()
 
 //basic middleware
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    // origin: "https://radiant-bites.netlify.app",
+    credentials: true,
+  })
+);
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/allItems", allItemsRouter);
+app.use("/orderedItems", orderedItemsRouter);
 
 //basic route
 app.get("/", (req, res) => {
