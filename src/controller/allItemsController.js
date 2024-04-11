@@ -8,10 +8,9 @@ const postingItem = async (req, res) => {
   
   const rowBase = Buffer.from(req?.file?.buffer).toString("base64");
   const base64 = "data:" + req?.file?.mimetype + ";base64," + rowBase;
+  console.log(req.file)
 
-  //   res.json({ message: "item posted successfully." });
   const { foodCategory, name, price, recipe, details, image } = req.body;
-
 
   try {
     cloudinary.config({
