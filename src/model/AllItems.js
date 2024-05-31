@@ -14,6 +14,8 @@ const itemSchema = new mongoose.Schema(
         "mutton",
         "chicken",
         "salads",
+        "fastFood",
+        "seaFood",
       ],
       required: true,
     },
@@ -33,7 +35,7 @@ const itemSchema = new mongoose.Schema(
       type: String,
     },
     image: {
-      type: String, // Assuming the image will be stored as a URL or file path
+      type: String , // Assuming the image will be stored as a URL or file path
     },
   },
   { timestamps: true, versionKey: false }

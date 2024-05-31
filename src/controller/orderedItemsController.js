@@ -1,6 +1,5 @@
 const OrderedItemModel = require("./../model/OrderedItems")
 
-
 //posting an item
 const postingAnOrder = async (req, res) => {
   const { name, loggedUserEmail, totalItems, totalPrice, image } = req.body

@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-// const allItemsRouter = require("./routes/allItems");
 const allItemsRouter = require("./src/routes/allItems");
 const orderedItemsRouter = require("./src/routes/orderedItems");
+const reviewsRouter =  require("./src/routes/reviewsRoute")
 const app = express();
 const port = process.env.PORT || 3000;
 const db_config =  require("./src/config/db_config")
@@ -22,6 +22,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/allItems", allItemsRouter);
 app.use("/orderedItems", orderedItemsRouter);
+app.use("/reviews", reviewsRouter);
+// app.use("/users",  )
 
 //basic route
 app.get("/", (req, res) => {
