@@ -1,23 +1,33 @@
 const AllUserModel = require("./../model/AllUserModel");
 
 
-//posting an user data
+// Posting user data
 const postingAnUserData = async (req, res) => {
-    const { name, email } = req.body
-    try {
-        const newUser = await AllUserModel.create({
-            name,
-            email
-        })
-        console.log("new user data is: ", newUser)
+  const { name, email } = req.body;
+  try {
+    // Check if a user with the same email already exists
+    const existingUser = await AllUserModel.findOne({ email });
+    if (existingUser) {
+      console.log("User with this email already exists: ", email);
+      return res
+        .status(200)
+        .json({ message: "User with this email already exists", user: existingUser });
+    }
+
+    // Create a new user
+    const newUser = await AllUserModel.create({
+      name,
+      email,
+    });
+    console.log("New user data is: ", newUser);
     return res
       .status(201)
-      .json({ message: "User created and receive user data successfully!" });
-
-    } catch (error) {
-      console.log("an error occurred to receiving new user data", error);
-    }
-}
+      .json({ message: "User created and received user data successfully!", user: newUser });
+  } catch (error) {
+    console.log("An error occurred while receiving new user data", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 
 //getting user data
@@ -38,3 +48,24 @@ module.exports = {
   postingAnUserData,
   gettingUserData,
 };
+
+
+
+  // const query = { email: email };
+  // const existingUserOrNot = AllUserModel.findOne(query);
+  // if (existingUserOrNot) {
+  // return res.send({ message: "user already exist" });
+  // } else {
+  // try {
+  //   const newUser = await AllUserModel.create({
+  //     name,
+  //     email,
+  //   });
+  //   console.log("new user data is: ", newUser);
+  //   return res
+  //     .status(201)
+  //     .json({ message: "User created and receive user data successfully!" });
+  // } catch (error) {
+  //   console.log("an error occurred to receiving new user data", error);
+  // }
+  // }

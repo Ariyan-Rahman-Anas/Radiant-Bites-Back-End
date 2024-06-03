@@ -24,7 +24,6 @@ const upload = multer({
 });
 
 
-
 //post a item
 route.post("/", upload.single("image"), postingItem);
 
