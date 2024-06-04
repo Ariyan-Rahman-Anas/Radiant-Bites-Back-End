@@ -2,12 +2,16 @@ const ReviewModel = require("./../model/ReviewModel")
 
 //posting a review
 const postingAReview = async (req, res) => {
-  const { name, profession, comment } = req.body;
+  const { name, profession, comment, userImage, reviewingDateIs, email, rate } = req.body;
   try {
     const aReview = await ReviewModel.create({
       name,
       profession,
       comment,
+      userImage,
+      email, 
+      rate,
+      reviewingDateIs,
     });
     console.log("latest review is: ", aReview);
     return res.status(201).json({ message: "Reviewed successful" });

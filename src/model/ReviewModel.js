@@ -6,15 +6,23 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       // required: true,
     },
+    email: {
+      type: String,
+      // required: true,
+    },
     profession: {
       type: String,
       // required: true,
     },
-    todayDateIs: {
-      type:String
+    reviewingDateIs: {
+      type: String,
     },
     comment: {
       type: String,
+      // required: true,
+    },
+    rate: {
+      type: Number,
       // required: true,
     },
     userImage: {

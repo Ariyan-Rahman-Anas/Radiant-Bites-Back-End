@@ -48,24 +48,3 @@ module.exports = {
   postingAnUserData,
   gettingUserData,
 };
-
-
-
-  // const query = { email: email };
-  // const existingUserOrNot = AllUserModel.findOne(query);
-  // if (existingUserOrNot) {
-  // return res.send({ message: "user already exist" });
-  // } else {
-  // try {
-  //   const newUser = await AllUserModel.create({
-  //     name,
-  //     email,
-  //   });
-  //   console.log("new user data is: ", newUser);
-  //   return res
-  //     .status(201)
-  //     .json({ message: "User created and receive user data successfully!" });
-  // } catch (error) {
-  //   console.log("an error occurred to receiving new user data", error);
-  // }
-  // }
