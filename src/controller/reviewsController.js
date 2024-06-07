@@ -34,23 +34,23 @@ const getAllReviews = async (req, res) => {
   }
 };
 
-//deleting a single item
-// const deletingAnItem = async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     const deletingItem = await OrderedItemModel.findByIdAndDelete(id);
-//     if (!deletingItem) {
-//       return res.status(404).json({ error: "item not found" });
-//     }
-//     res.status(200).json({ deletedItemIa: deletingItem });
-//   } catch (error) {
-//     console.log(`Error deleting item with ID ${id}:`, error);
-//     res.status(404).json({ error: "Internal server error" });
-//   }
-// };
+// deleting a single item
+const deletingAnItem = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletingItem = await ReviewModel.findByIdAndDelete(id);
+    if (!deletingItem) {
+      return res.status(404).json({ error: "item not found" });
+    }
+    res.status(200).json({ deletedItemIa: deletingItem });
+  } catch (error) {
+    console.log(`Error deleting item with ID ${id}:`, error);
+    res.status(404).json({ error: "Internal server error" });
+  }
+};
 
 module.exports = {
   postingAReview,
   getAllReviews,
-//   deletingAnItem,
+  deletingAnItem,
 };

@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "http://localhost:5173",
-    // origin: "https://radiant-bites.netlify.app",
+    // origin: "https://radiant-bites.netlify.app",                       t
     credentials: true,
   })
 );
@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/allItems", allItemsRouter);
 app.use("/orderedItems", orderedItemsRouter);
 app.use("/reviews", reviewsRouter);
-app.use("/allUser", allUserRouter);
+app.use("/users", allUserRouter);
 
 //basic route
 app.get("/", (req, res) => {

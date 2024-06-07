@@ -36,7 +36,7 @@ const gettingUserData = async (req, res) => {
         const result = await AllUserModel.find()
         res.status(200).json({
           totalUser: result.length,
-          userData: result,
+          data: result,
         });
     } catch (error) {
         console.log("an error occurred to getting user data")

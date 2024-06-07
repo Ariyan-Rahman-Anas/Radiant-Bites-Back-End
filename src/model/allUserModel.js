@@ -14,5 +14,5 @@ const allUserSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
-const allUserModel = mongoose.model("allUser", allUserSchema)
+const allUserModel = mongoose.model("users", allUserSchema)
 module.exports=allUserModel
