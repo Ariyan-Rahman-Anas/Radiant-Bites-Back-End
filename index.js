@@ -4,6 +4,7 @@ const allItemsRouter = require("./src/routes/allItems");
 const orderedItemsRouter = require("./src/routes/orderedItems");
 const reviewsRouter =  require("./src/routes/reviewsRoute")
 const allUserRouter =  require("./src/routes/allUserRoute")
+const allAdminRouter =  require("./src/routes/adminRoute")
 const app = express();
 const port = process.env.PORT || 3000;
 const db_config =  require("./src/config/db_config")
@@ -15,7 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "http://localhost:5173",
-    // origin: "https://radiant-bites.netlify.app",                       t
+    // origin: "https://radiant-bites.netlify.app",
     credentials: true,
   })
 );
@@ -25,6 +26,7 @@ app.use("/allItems", allItemsRouter);
 app.use("/orderedItems", orderedItemsRouter);
 app.use("/reviews", reviewsRouter);
 app.use("/users", allUserRouter);
+app.use("/admins", allAdminRouter);
 
 //basic route
 app.get("/", (req, res) => {

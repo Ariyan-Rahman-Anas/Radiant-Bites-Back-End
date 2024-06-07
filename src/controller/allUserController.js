@@ -13,7 +13,6 @@ const postingAnUserData = async (req, res) => {
         .status(200)
         .json({ message: "User with this email already exists", user: existingUser });
     }
-
     // Create a new user
     const newUser = await AllUserModel.create({
       name,
@@ -44,7 +43,24 @@ const gettingUserData = async (req, res) => {
     }
 }
 
+
+// deleting a single item
+const deletingAnUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletingUser = await AllUserModel.findByIdAndDelete(id);
+    if (!deletingUser) {
+      return res.status(404).json({ error: "user not found" });
+    }
+    res.status(200).json({ deletedUserIs: deletingUser });
+  } catch (error) {
+    console.log(`Error deleting item with ID ${id}:`, error);
+    res.status(404).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   postingAnUserData,
   gettingUserData,
+  deletingAnUser
 };
