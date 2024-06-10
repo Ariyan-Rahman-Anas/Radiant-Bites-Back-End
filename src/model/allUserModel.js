@@ -10,9 +10,16 @@ const allUserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+    },
+    role: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true, versionKey: false }
 );
 
 const allUserModel = mongoose.model("users", allUserSchema)
-module.exports=allUserModel
+module.exports = allUserModel;

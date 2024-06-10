@@ -3,7 +3,7 @@ const AllUserModel = require("./../model/AllUserModel");
 
 // Posting user data
 const postingAnUserData = async (req, res) => {
-  const { name, email } = req.body;
+  const { name, email, image, role } = req.body;
   try {
     // Check if a user with the same email already exists
     const existingUser = await AllUserModel.findOne({ email });
@@ -17,6 +17,8 @@ const postingAnUserData = async (req, res) => {
     const newUser = await AllUserModel.create({
       name,
       email,
+      image,
+      role
     });
     console.log("New user data is: ", newUser);
     return res
@@ -44,6 +46,58 @@ const gettingUserData = async (req, res) => {
 }
 
 
+// Get users by role
+const getUsersByRole = async (req, res) => {
+  const { role } = req.params;
+  try {
+    const users = await AllUserModel.find({ role: role });
+    res.status(200).json({
+      totalUsers: users.length,
+      data: users,
+    });
+  } catch (error) {
+    console.log(`An error occurred while fetching users with role ${role}`, error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+//updating user role
+// const updatingUserRole = async (req, res) => {
+//   const { id } = req.params
+//   try {
+//     const updatingRole = await AllUserModel.updateOne(id)
+//     if (!updatingRole) {
+//       return res
+//         .status(404)
+//         .json({ error: `User not found with this Id: ${id}` });
+//     }
+//     res.status(200).json({ makeANewUserWhichIs: updatingRole });
+//   } catch (error) {
+//     console.log(`Error to making an user as admin with ID ${id}:`, error);
+//     res.status(404).json({ error: "Internal server error" });
+//   }
+// }
+//updating user role 
+const updatingUserRole = async (req, res) => {
+  const { id } = req.params;
+  const { role } = req.body; // Extract the new role from the request body
+  try {
+    const updatingRole = await AllUserModel.findByIdAndUpdate(
+      id,
+      { role },
+      { new: true } // Return the updated document
+    );
+    if (!updatingRole) {
+      return res.status(404).json({ error: `User not found with this Id: ${id}` });
+    }
+    res.status(200).json({ updatedUser: updatingRole });
+  } catch (error) {
+    console.log(`Error updating user role with ID ${id}:`, error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 // deleting a single item
 const deletingAnUser = async (req, res) => {
   const { id } = req.params;
@@ -54,7 +108,7 @@ const deletingAnUser = async (req, res) => {
     }
     res.status(200).json({ deletedUserIs: deletingUser });
   } catch (error) {
-    console.log(`Error deleting item with ID ${id}:`, error);
+    console.log(`Error deleting user with ID ${id}:`, error);
     res.status(404).json({ error: "Internal server error" });
   }
 };
@@ -62,5 +116,7 @@ const deletingAnUser = async (req, res) => {
 module.exports = {
   postingAnUserData,
   gettingUserData,
-  deletingAnUser
+  getUsersByRole,
+  updatingUserRole,
+  deletingAnUser,
 };
