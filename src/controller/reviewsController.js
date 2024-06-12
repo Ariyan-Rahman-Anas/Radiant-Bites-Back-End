@@ -20,7 +20,7 @@ const postingAReview = async (req, res) => {
   }
 };
 
-
+//getting review
 const getAllReviews = async (req, res) => {
   try {
     const result = await ReviewModel.find();
