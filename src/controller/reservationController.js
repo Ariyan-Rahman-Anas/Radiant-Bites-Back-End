@@ -9,6 +9,8 @@ const postingAReservation = async (req, res) => {
     date,
     time,
     guests,
+    preferredSeating,
+    occasionType,
     specialRequests,
     reserverPicture,
   } = req.body;
@@ -20,6 +22,8 @@ const postingAReservation = async (req, res) => {
       date,
       time,
       guests,
+      preferredSeating,
+      occasionType,
       specialRequests,
       reserverPicture,
     });

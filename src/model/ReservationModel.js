@@ -32,7 +32,14 @@ const reservationSchema = new mongoose.Schema(
     },
     reserverPicture: {
       type: String,
-      // required: true,
+    },
+    preferredSeating: {
+      type: String,
+      required: true,
+    },
+    occasionType: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true, versionKey: false }
