@@ -1,15 +1,12 @@
 const express = require("express");
+const route = express.Router();
 const multer = require("multer");
-
 const {
   postingItem,
   getSingleItem,
   getAllItems,
   findingByCategory
-} = require("./../controller/allItemsController");
-const route = express.Router();
-
-
+} = require("../controller/allItemsController");
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -22,7 +19,6 @@ const upload = multer({
     }
   },
 });
-
 
 //post a item
 route.post("/", upload.single("image"), postingItem);

@@ -1,55 +1,17 @@
 const ItemModel = require("./../model/AllItems");
 const cloudUploader = require("./cloudUploader");
-const cloudinary = require("cloudinary").v2; 
-// const { cloudUploader } = require("./cloudUtils");
 
-
-
-//posting item
-// const postingItem = async (req, res) => {
-  
-//   const rowBase = Buffer.from(req?.file?.buffer).toString("base64");
-//   const base64 = "data:" + req?.file?.mimetype + ";base64," + rowBase;
-//   console.log(req.file)
-
-//   const { foodCategory, name, price, recipe, details, image } = req.body;
-
-//   try {
-//     cloudinary.config({
-//       cloud_name: process.env.CLOUDINARY_NAME,
-//       api_key: process.env.CLOUDINARY_API,
-//       api_secret: process.env.CLOUDINARY_SECRET_KEY,
-//     });
-
-//     const imageCloudiConfig = await cloudinary.uploader.upload(base64)
-    
-//     const item = await ItemModel.create({
-//       foodCategory,
-//       name,
-//       price,
-//       recipe,
-//       details,
-//       image: imageCloudiConfig.secure_url,
-//     });
-//     console.log("item is :", item )
-//     return res.status(201).json({
-//       message: "Item posted",
-//     });
-//   } catch (error) {
-//     console.log("error occurred: ", error);
-//   }
-// };
-
+//posting an item
 const postingItem = async (req, res) => {
-  console.log(req.body)
-  const { foodCategory, name, price, recipe, details, image } = req.body;
+  const { foodCategory, name, price, recipe, details } = req.body;
   const file = req.file;
+  console.log("file from all item is:", file);
   if (!file) return res.status(400).send("Please enter image !");
   try {
     // file validation and encode to base64
     const img_res = await cloudUploader(file);
     // add new item with image
-    const item = await ItemModel.create({
+    const anItem = await ItemModel.create({
       foodCategory,
       name,
       price,
@@ -57,6 +19,7 @@ const postingItem = async (req, res) => {
       details,
       image: img_res.secure_url,
     });
+    console.log("the new item is: ", anItem);
     return res.status(201).json({
       message: "Item posted",
     });
@@ -66,7 +29,7 @@ const postingItem = async (req, res) => {
 };
 
 
-//single item
+//getting single item
 const getSingleItem = async (req, res) => {
   const id = req.params.id;
   try {
@@ -80,7 +43,7 @@ const getSingleItem = async (req, res) => {
   }
 };
 
-//all items
+//getting all items
 const getAllItems = async (req, res) => {
   try {
     const result = await ItemModel.find();
@@ -89,7 +52,8 @@ const getAllItems = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    console.log(error);
+    console.log("error with fetching all items ", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -106,7 +70,6 @@ const findingByCategory = async (req, res) => {
     return res.status(400).send(error);
   }
 };
-
 
 module.exports = {
   postingItem,
