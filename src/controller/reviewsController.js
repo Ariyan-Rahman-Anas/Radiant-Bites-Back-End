@@ -23,10 +23,10 @@ const postingAReview = async (req, res) => {
 //getting review
 const getAllReviews = async (req, res) => {
   try {
-    const result = await ReviewModel.find();
+    const data = await ReviewModel.find();
     res.status(200).json({
-      totalReviews: result.length,
-      data: result,
+      totalReviews: data.length,
+      data,
     });
   } catch (error) {
     console.error("Error fetching reviews:", error);

@@ -14,6 +14,9 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    authorImage: {
+      type: String,
+    },
     email: {
       type: String,
       required: true,

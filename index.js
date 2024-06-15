@@ -7,6 +7,8 @@ const allUserRouter = require("./src/routes/allUserRoute")
 const reservationRouter = require("./src/routes/reservationRoute")
 const subscriberRouter = require("./src/routes/subscriberRoute");
 const blogRouter = require("./src/routes/blogRoute");
+const blogSearchRouter = require("./src/routes/blogSearchRoute");
+
 const app = express();
 const port = process.env.PORT || 3000;
 const db_config =  require("./src/config/db_config")
@@ -31,6 +33,7 @@ app.use("/users", allUserRouter);
 app.use("/reservations", reservationRouter);
 app.use("/subscribers", subscriberRouter);
 app.use("/blogs", blogRouter);
+app.use("/search", blogSearchRouter);
 
 //basic route
 app.get("/", (req, res) => {

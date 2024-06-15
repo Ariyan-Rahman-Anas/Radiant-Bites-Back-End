@@ -34,10 +34,10 @@ const postingAnUserData = async (req, res) => {
 //getting user data
 const gettingUserData = async (req, res) => {
   try {
-    const result = await AllUserModel.find();
+    const data = await AllUserModel.find();
     res.status(200).json({
-      totalUser: result.length,
-      data: result,
+      totalUser: data.length,
+      data,
     });
   } catch (error) {
     console.log("an error occurred to getting user data");
@@ -49,10 +49,10 @@ const gettingUserData = async (req, res) => {
 const getUsersByRole = async (req, res) => {
   const { role } = req.params;
   try {
-    const users = await AllUserModel.find({ role: role });
+    const data = await AllUserModel.find({ role: role });
     res.status(200).json({
-      totalUsers: users.length,
-      data: users,
+      totalUsers: data.length,
+      data,
     });
   } catch (error) {
     console.log(

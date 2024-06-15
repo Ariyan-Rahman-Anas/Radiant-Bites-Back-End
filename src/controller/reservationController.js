@@ -38,8 +38,8 @@ const postingAReservation = async (req, res) => {
 //getting all reservation
 const gettingAllReservation = async (req, res) => {
     try {
-        const result = await ReservationModel.find();
-        res.status(200).json({ totalReserved: result.length, data: result });
+        const data = await ReservationModel.find();
+        res.status(200).json({ totalReserved: data.length, data });
     } catch (error) {
       console.error("Error fetching reservations:", error);
       res.status(500).json({ error: "Internal server error" });

@@ -19,8 +19,8 @@ const postingASubscriber = async (req, res) => {
 //getting all subscriber
 const gettingAllSubscribers = async (req, res) => {
     try {
-        const result = await SubscriberModel.find()
-        res.status(200).json({ totalSubscribers: result.length, data: result });
+        const data = await SubscriberModel.find()
+        res.status(200).json({ totalSubscribers: data.length, data });
     } catch (error) {
         console.log("error with fetching all subscribers ", error)
         res.status(500).json({ error: "Internal server error" });

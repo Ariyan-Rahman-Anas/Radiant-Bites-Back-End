@@ -28,7 +28,6 @@ const postingItem = async (req, res) => {
   }
 };
 
-
 //getting single item
 const getSingleItem = async (req, res) => {
   const id = req.params.id;
@@ -46,10 +45,10 @@ const getSingleItem = async (req, res) => {
 //getting all items
 const getAllItems = async (req, res) => {
   try {
-    const result = await ItemModel.find();
+    const data = await ItemModel.find();
     res.status(200).json({
-      totalItems: result.length,
-      data: result,
+      totalItems: data.length,
+      data,
     });
   } catch (error) {
     console.log("error with fetching all items ", error);
@@ -61,10 +60,10 @@ const getAllItems = async (req, res) => {
 const findingByCategory = async (req, res) => {
   const { category } = req.params;
   try {
-    const categoryItems = await ItemModel.find({ foodCategory: category });
+    const data = await ItemModel.find({ foodCategory: category });
     return res.status(200).json({
-      totalItemsInThisCategory: categoryItems.length,
-      data: categoryItems,
+      totalItemsInThisCategory: data.length,
+      data,
     });
   } catch (error) {
     return res.status(400).send(error);
