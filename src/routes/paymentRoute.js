@@ -3,6 +3,6 @@ const route = express.Router();
 const { makePayment } = require("./../controller/paymentController");
 
 //making a payment
-route.use("/", makePayment);
+route.post("/", makePayment);
 
-module.exports =route
+module.exports = route

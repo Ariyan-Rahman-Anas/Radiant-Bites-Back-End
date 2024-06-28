@@ -12,7 +12,7 @@ const paymentRouter = require("./src/routes/paymentRoute");
 const paymentHistoryRoute = require("./src/routes/paymentHistoryRoute");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const db_config = require("./src/config/db_config");
 require("dotenv").config();
 db_config();

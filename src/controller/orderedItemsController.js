@@ -39,7 +39,7 @@ const getAllOrderedItems = async (req, res) => {
   try {
     let query = {};
     if (loggedUserEmail) {
-      query = { loggedUserEmail }; // If loggedUserEmail is provided, filter by it
+      query = { loggedUserEmail };
     }
     const result = await OrderedItemModel.find(query);
     res.status(200).json({
