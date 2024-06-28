@@ -7,6 +7,7 @@ const {
   getAllItems,
   gettingItemsByQuery,
   findingByCategory,
+  updatingAnItem,
   deletingAnItem,
 } = require("../controller/allItemsController");
 
@@ -36,6 +37,9 @@ route.get("/:id", getSingleItem);
 
 //getting a specific item by food category
 route.get("/menu/:category", findingByCategory)
+
+// update an item
+route.patch("/:id", upload.single("image"), updatingAnItem);
 
 //deleing an item
 route.delete("/:id", deletingAnItem);

@@ -95,6 +95,46 @@ const findingByCategory = async (req, res) => {
   }
 };
 
+//updating an item
+const updatingAnItem = async (req, res) => {
+  const { id } = req.params;
+  const { authorName, email, foodCategory, name, price, recipe, details } = req.body;
+  const file = req?.file;
+
+  try {
+    let updateData = {
+      authorName,
+      email,
+      foodCategory,
+      name,
+      price,
+      recipe,
+      details,
+    };
+
+    if (file) {
+      // If there's a new file, upload it and include it in the update
+      const img_res = await cloudUploader(file);
+      updateData.image = img_res.secure_url;
+    }
+
+    const updatedItem = await ItemModel.findByIdAndUpdate(id, updateData, { new: true });
+
+    if (!updatedItem) {
+      return res.status(404).json({ message: `Item not found with the Id: ${id}` });
+    }
+
+    return res.status(200).json({
+      message: "Item updated successfully",
+      updatedItem,
+    });
+  } catch (error) {
+    console.log(`Error updating item with ID ${id}:`, error);
+    return res.status(500).json({ message: "Internal server error", error: error.message });
+  }
+}
+
+
 
 //deleting an item
 const deletingAnItem = async (req, res) => { 
@@ -120,5 +160,6 @@ module.exports = {
   getAllItems,
   gettingItemsByQuery,
   findingByCategory,
+  updatingAnItem,
   deletingAnItem,
 };

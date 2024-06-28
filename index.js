@@ -21,8 +21,8 @@ db_config();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    // origin: "https://radiant-bites.netlify.app",
+    // origin: "http://localhost:5173",
+    origin: "https://radiant-bites.netlify.app",
     credentials: true,
   })
 );
