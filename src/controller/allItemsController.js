@@ -95,10 +95,30 @@ const findingByCategory = async (req, res) => {
   }
 };
 
+
+//deleting an item
+const deletingAnItem = async (req, res) => { 
+  const { id } = req.params
+  try {
+    const deletingItem = await ItemModel.findByIdAndDelete(id)
+    if (!deletingItem) {
+      return res
+        .status(400)
+        .json({ error: `Item not found with the Id: ${id}` });
+    }
+  } catch (error) {
+    console.log(`Error deleting item with ID ${id}:`, error);
+    res
+      .status(404)
+      .json({ message: "Internal server error", error: error.message });
+  }
+}
+
 module.exports = {
   postingItem,
   getSingleItem,
   getAllItems,
   gettingItemsByQuery,
   findingByCategory,
+  deletingAnItem,
 };

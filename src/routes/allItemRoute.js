@@ -7,6 +7,7 @@ const {
   getAllItems,
   gettingItemsByQuery,
   findingByCategory,
+  deletingAnItem,
 } = require("../controller/allItemsController");
 
 const upload = multer({
@@ -35,5 +36,8 @@ route.get("/:id", getSingleItem);
 
 //getting a specific item by food category
 route.get("/menu/:category", findingByCategory)
+
+//deleing an item
+route.delete("/:id", deletingAnItem);
 
 module.exports = route;

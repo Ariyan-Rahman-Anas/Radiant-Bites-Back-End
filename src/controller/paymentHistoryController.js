@@ -77,7 +77,6 @@ const deleteAHistory = async (req, res) => {
     res
       .status(404)
       .json({ message: "Internal server error", error: error.message });
-    
   }
 }
 
