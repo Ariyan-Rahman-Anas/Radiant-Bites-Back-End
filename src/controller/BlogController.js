@@ -1,4 +1,4 @@
-const BlogModel = require("./../model/BlogModel");
+const BlogModel = require("../model/BlogModel");
 const cloudUploader = require("./cloudUploader");
 
 // Posting a blog
@@ -53,26 +53,51 @@ const postingABlog = async (req, res) => {
 const gettingSingleBlog = async (req, res) => {
   const id = req.params.id;
   try {
-    const blogFindingById = await BlogModel.findById(id)
+    const blogFindingById = await BlogModel.findById(id);
     if (blogFindingById) {
-      return res.json({blogFindingById})
+      return res.json({ blogFindingById });
     }
-    return res.status(400).json({message: "single blog not found" })
+    return res.status(400).json({ message: "single blog not found" });
   } catch (error) {
     return res.status(400).json({ error: "Invalid single blog Id", error });
+  }
+};
+
+
+//getting blogs by query with email
+const gettingBlogsByQuery = async (req, res) => {
+  const { email } = req.query;
+  console.log(req)
+  try {
+    let query = {}
+    if (email) {
+      query = { email };
+    }
+    const data = await BlogModel.find(query)
+    if (data && data.length > 0) {
+      return res.json({ totalBlogs: data.length, data });
+    }
+    console.log("blog:", data )
+    return res
+      .status(400)
+      .send({ message: "No blog found for the given email."});
+  } catch (error) {
+    return res
+      .status(400)
+      .send({ message: "Invalid request.", error: error.message });
   }
 }
 
 //getting all blogs
 const gettingAllBlogs = async (req, res) => {
   try {
-    const data = await BlogModel.find()
+    const data = await BlogModel.find();
     res.status(200).json({ totalBlogs: data.length, data });
   } catch (error) {
     console.log("error with fetching all blogs ", error);
     res.status(500).json({ error: "Internal server error" });
   }
-}
+};
 
 //getting blog by category
 const gettingBlogByCategory = async (req, res) => {
@@ -88,11 +113,12 @@ const gettingBlogByCategory = async (req, res) => {
       .status(400)
       .send({ error: "error with fetch blog by category: ", error });
   }
-}
+};
 
 module.exports = {
   postingABlog,
   gettingSingleBlog,
   gettingAllBlogs,
+  gettingBlogsByQuery,
   gettingBlogByCategory,
 };

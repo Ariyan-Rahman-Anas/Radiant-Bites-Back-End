@@ -18,7 +18,7 @@ const postingAnOrder = async (req, res) => {
   }
 }
 
-
+//getting single item
 const getSingleItem = async (req, res) => {
   const { id } = req.params
   try {
@@ -33,7 +33,7 @@ const getSingleItem = async (req, res) => {
   }
 }
 
-
+//getting all items
 const getAllOrderedItems = async (req, res) => {
   const { loggedUserEmail } = req.query; // Assuming loggedUserEmail is passed as a query parameter
   try {
@@ -66,7 +66,6 @@ const deletingAnItem = async (req, res) => {
     res.status(404).json({error: "Internal server error"})
   }
 }
-
 
 module.exports = {
   getSingleItem,

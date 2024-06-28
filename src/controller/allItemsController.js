@@ -3,7 +3,8 @@ const cloudUploader = require("./cloudUploader");
 
 //posting an item
 const postingItem = async (req, res) => {
-  const { foodCategory, name, price, recipe, details } = req.body;
+  const { authorName, email, foodCategory, name, price, recipe, details } =
+    req.body;
   const file = req.file;
   console.log("file from all item is:", file);
   if (!file) return res.status(400).send("Please enter image !");
@@ -12,6 +13,8 @@ const postingItem = async (req, res) => {
     const img_res = await cloudUploader(file);
     // add new item with image
     const anItem = await ItemModel.create({
+      authorName,
+      email,
       foodCategory,
       name,
       price,
@@ -41,6 +44,28 @@ const getSingleItem = async (req, res) => {
     return res.status(400).send({ message: "Invalid single item id!" });
   }
 };
+
+//getting items by query
+const gettingItemsByQuery = async (req, res) => {
+  const { email } = req.query;
+  try {
+    let query = {};
+    if (email) {
+      query = { email };
+    }
+    const data = await ItemModel.find(query);
+    if (data.length > 0) {
+      return res.json({ totalDishes: data.length, data });
+    }
+    return res
+      .status(404)
+      .send({ message: "No dish found for the given email." });
+  } catch (error) {
+    return res
+      .status(400)
+      .send({ message: "Invalid request.", error: error.message });
+  }
+}
 
 //getting all items
 const getAllItems = async (req, res) => {
@@ -74,5 +99,6 @@ module.exports = {
   postingItem,
   getSingleItem,
   getAllItems,
-  findingByCategory
+  gettingItemsByQuery,
+  findingByCategory,
 };

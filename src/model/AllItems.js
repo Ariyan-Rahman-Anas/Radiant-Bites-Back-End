@@ -2,6 +2,14 @@ const mongoose = require("mongoose");
 
 const itemSchema = new mongoose.Schema(
   {
+    authorName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
     foodCategory: {
       type: String,
       enum: [
@@ -35,7 +43,7 @@ const itemSchema = new mongoose.Schema(
       type: String,
     },
     image: {
-      type: String , // Assuming the image will be stored as a URL or file path
+      type: String, // Assuming the image will be stored as a URL or file path
     },
   },
   { timestamps: true, versionKey: false }

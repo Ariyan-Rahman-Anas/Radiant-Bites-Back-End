@@ -5,7 +5,8 @@ const {
   postingItem,
   getSingleItem,
   getAllItems,
-  findingByCategory
+  gettingItemsByQuery,
+  findingByCategory,
 } = require("../controller/allItemsController");
 
 const upload = multer({
@@ -25,6 +26,9 @@ route.post("/", upload.single("image"), postingItem);
 
 //getting all items
 route.get("/", getAllItems);
+
+//getting items by query with email
+route.get("/query", gettingItemsByQuery);
 
 //getting a specific item by id
 route.get("/:id", getSingleItem);

@@ -34,7 +34,6 @@ const postingAHistory = async (req, res) => {
   }
 };
 
-
 // Getting payments history by query
 const gettingHistoryByQuery = async (req, res) => {
   const {email} = req.query
@@ -53,7 +52,6 @@ const gettingHistoryByQuery = async (req, res) => {
   }
 };
 
-
 // Getting all history
 const gettingAllHistory = async (req, res) => {
   try {
@@ -64,7 +62,6 @@ const gettingAllHistory = async (req, res) => {
     res.status(500).json({ message: "Internal server error", error: error.message });
   }
 };
-
 
 //delete a history
 const deleteAHistory = async (req, res) => {

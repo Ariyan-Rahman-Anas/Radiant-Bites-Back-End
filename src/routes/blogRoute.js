@@ -5,8 +5,9 @@ const {
   postingABlog,
   gettingSingleBlog,
   gettingAllBlogs,
+  gettingBlogsByQuery,
   gettingBlogByCategory,
-} = require("./../controller/BlogController");
+} = require("../controller/blogController");
 
 // Multer configuration
 const upload = multer({
@@ -29,6 +30,9 @@ route.get("/:id", gettingSingleBlog);
 
 // Getting all blogs
 route.get("/", gettingAllBlogs);
+
+// Getting all blogs
+route.get("/blog/query", gettingBlogsByQuery);
 
 //getting a specific item by food category
 route.get("/blog-category/:category", gettingBlogByCategory);
